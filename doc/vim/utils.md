@@ -3,7 +3,7 @@
 * yankring - effortless sanity for pasting. every time you yank something it goes into a buffer. after hitting p to paste, use ctrl-p or ctrl-n to cycle through the paste options. great for when you accidentally overwrite your yank with a delete.
 * surround - super easy quote and tag manipulation - ysiw" - sourround inner word with quotes. ci"' - change inner double quotes to single quotes, etc
 * greplace - use :Gsearch to find across many files, replace inside the changes, then :Greplace to do a replace across all matches - made lightning fast with Silver Searcher
-* vim-markdown-preview - :Mm to view your README.md as html
+* vim-markdown-preview - Control + p to view your README.md as html
 * html-escape - ,he and ,hu to escape and unescape html
 * Gundo - visualize your undos - pretty amazing plugin. Hit ,u with my keymappings to trigger it, very user friendly
 * vim-indent-guides - visual indent guides, off by default
