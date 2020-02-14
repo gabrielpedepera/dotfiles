@@ -1,1 +1,2 @@
-prompt skwp
+ autoload -U promptinit; promptinit
+ prompt spaceship
