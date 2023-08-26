@@ -1,4 +1,11 @@
 # Dotfiles
+
+## To Do
+
+- [ ] Add NVIM config
+- [ ] Add VSCode config
+- [ ] Remove Pryrc ?
+
 ## Installation
 
 To get started please run:
@@ -55,7 +62,6 @@ mnemonic aliases. Please feel free to edit them:
     ae # alias edit
     ar # alias reload
 
-
 ### Git Customizations:
 
 Dotfiles will take over your `~/.gitconfig`, so if you want to store your usernames, please put them into `~/.gitconfig.user`
@@ -79,16 +85,6 @@ It is recommended to use this file to set your user info. Alternately, you can s
 
 A .gemrc is included. Never again type `gem install whatever --no-ri --no-rdoc`. `--no-ri --no-rdoc` is done by default.
 
-### Vimization of everything
-
-The provided inputrc and editrc will turn your various command line tools like mysql and irb into vim prompts. There's
-also an included Ctrl-R reverse history search feature in editrc, very useful in irb, postgres command line, and etc.
-
-### Github Issues: [ghi gem](https://github.com/stephencelis/ghi)
-
-We include the `ghi` command. Try `ghi list` and have fun managing issues from command line!
-
 ### [Pry](https://pryrepl.org/)
 
-Pry offers a much better out of the box IRB experience with colors, tab completion, and lots of other tricks. You can also use it
-as an actual debugger by installing [pry-nav](https://github.com/nixme/pry-nav).
+Pry offers a much better out of the box IRB experience with colors, tab completion, and lots of other tricks. You can also use it as an actual debugger by installing [pry-nav](https://github.com/nixme/pry-nav).
