@@ -1,3 +1,6 @@
 [submodule "zsh/autosuggestions/zsh-autosuggestions"]
 	path = zsh/autosuggestions/zsh-autosuggestions
 	url = git@github.com:zsh-users/zsh-autosuggestions.git
+[submodule "zsh/fzf"]
+	path = zsh/fzf
+	url = git@github.com:junegunn/fzf.git

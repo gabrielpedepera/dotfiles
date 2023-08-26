@@ -1,13 +1,4 @@
 # Dotfiles
-
-#### Install
-
-```bash
-sh -c "\`curl -fsSL https://raw.githubusercontent.com/gabrielpedepera/dotfiles/main/install.sh \`"
-```
-
-**Always be sure to run `rake update` after pulling to ensure plugins are updated**
-
 ## Installation
 
 To get started please run:
@@ -15,17 +6,14 @@ To get started please run:
 ```bash
 sh -c "`curl -fsSL https://raw.githubusercontent.com/gabrielpedepera/dotfiles/main/install.sh`"
 ```
-
 ## Wait, you're not done! Do this:
+#### Install iTerm Themes
+Go to Profiles => Colors => Load Presets to pick:
 
-#### Install iTerm Solarized Colors
-Will install Solarized colorschemes into your iTerm. Go to Profiles => Colors => Load Presets to pick Solarized Dark.
-
-#### Remap caps-lock to escape with [Karabiner-Elements](https://pqrs.org/osx/karabiner/index.html)
-The escape key is the single most used key in vim.  Old keyboards used to have Escape where Tab is today. Apple keyboards are the worst with their tiny Esc keys. But all this is fixed by remapping Caps to Escape.  If you're hitting a small target in the corner, you are slowing yourself down considerably, and probably damaging your hands with repetitive strain injuries.
-
+* Lovelace
+* Solarized Dark
 #### Set up a system wide hotkey for iTerm (Keys=>Hotkey)
-Recommended Cmd-Escape, which is really Cmd-Capslock.
+Recommended Cmd-Escape
 
 #### In iTerm, uncheck "Native full screen windows" on General
 This will give you fast full screen windows that are switchable without switching to spaces.

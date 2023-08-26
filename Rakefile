@@ -123,6 +123,9 @@ def install_zsh_enhancements
   fancy_puts 'ZSH Enhancements'
 
   install_files(Dir.glob('zsh/zshrc/zshrc'), :symlink)
+  # Install fzf is a general-purpose command-line fuzzy finder.
+  install_files(Dir.glob('zsh/fzf'), :symlink)
+  run %{ $HOME/.fzf/install --all --no-update-rc --no-bash --no-fish }
 
   puts 'Creating directories for your customizations'
   run %{ mkdir -p $HOME/.zsh.before }
