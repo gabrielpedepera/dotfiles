@@ -107,9 +107,6 @@ def install_homebrew_packages
   if $?.success?
     puts 'Installing Homebrew packages... There may be some warnings...'
     run %{brew install zsh starship nvim bat git-delta duf tldr}
-    run %{brew tap cantino/mcfly}
-    run %{brew install cantino/mcfly/mcfly}
-
   else
     abort %q{
       You need to install homebrew manually first:

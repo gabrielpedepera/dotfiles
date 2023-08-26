@@ -5,7 +5,7 @@
 - [ ] Add NVIM config
 - [ ] Add VSCode config
 - [ ] Remove Pryrc ?
-
+- [ ] Document Homebrew Tools
 ## Installation
 
 To get started please run:
