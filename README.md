@@ -51,9 +51,11 @@ Automatic spell correction for your commands, syntax highlighting, and more.
 We've also provided lots of enhancements:
 
 * `Ctrl-x,Ctrl-l` to insert output of last command
-* [fasd](https://github.com/clvv/fasd) integration - hit `z` and partial match for recently used directory. Tab completion enabled.
+* [fasd](https://github.com/clvv/fasd) integration - hit `z` and partial match for recently used directory. Tab completion enabled. Like [autojump](https://github.com/wting/autojump)
 * `Ctrl-r` to use [fsd](https://github.com/junegunn/fzf) a general-purpose command-line fuzzy finder.
 * Fish-like fast/unobtrusive autosuggestions for zsh through [zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions)
+
+
 ### Aliases
 
 Lots of things we do every day are done with two or three character
