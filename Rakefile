@@ -13,7 +13,7 @@ task :install => [:submodule_init, :submodules] do
   install_files(Dir.glob('vimify/*'))
 
   install_zsh_enhancements
-  install_term_theme if RUBY_PLATFORM.downcase.include?('darwin')
+  install_term_themes if RUBY_PLATFORM.downcase.include?('darwin')
   run_bundle_config
 
   success_msg("installed")
@@ -64,16 +64,24 @@ def run_bundle_config
   run %{ bundle config --global jobs #{bundler_jobs} }
 end
 
-def install_term_theme
+def install_term_themes
   fancy_puts 'Installing iTerm2 themes'
 
-  # Lovelace
-  run %{ /usr/libexec/PlistBuddy -c "Add :'Custom Color Presets':'Lovelace' dict" ~/Library/Preferences/com.googlecode.iterm2.plist }
-  run %{ /usr/libexec/PlistBuddy -c "Merge 'iTerm2/Lovelace.itermcolors' :'Custom Color Presets':'Lovelace'" ~/Library/Preferences/com.googlecode.iterm2.plist }
+  # catppuccin-frappe
+  run %{ /usr/libexec/PlistBuddy -c "Add :'Custom Color Presets':'catppuccin-frappe' dict" ~/Library/Preferences/com.googlecode.iterm2.plist }
+  run %{ /usr/libexec/PlistBuddy -c "Merge 'iTerm2/catppuccin-frappe.itermcolors' :'Custom Color Presets':'catppuccin-frappe'" ~/Library/Preferences/com.googlecode.iterm2.plist }
 
-  # Solarized Dark
-  run %{ /usr/libexec/PlistBuddy -c "Add :'Custom Color Presets':'Solarized Dark' dict" ~/Library/Preferences/com.googlecode.iterm2.plist }
-  run %{ /usr/libexec/PlistBuddy -c "Merge 'iTerm2/Solarized Dark.itermcolors' :'Custom Color Presets':'Solarized Dark'" ~/Library/Preferences/com.googlecode.iterm2.plist }
+  # catppuccin-latte
+  run %{ /usr/libexec/PlistBuddy -c "Add :'Custom Color Presets':'catppuccin-latte' dict" ~/Library/Preferences/com.googlecode.iterm2.plist }
+  run %{ /usr/libexec/PlistBuddy -c "Merge 'iTerm2/catppuccin-latte.itermcolors' :'Custom Color Presets':'catppuccin-latte'" ~/Library/Preferences/com.googlecode.iterm2.plist }
+
+  # catppuccin-macchiato
+  run %{ /usr/libexec/PlistBuddy -c "Add :'Custom Color Presets':'catppuccin-macchiato' dict" ~/Library/Preferences/com.googlecode.iterm2.plist }
+  run %{ /usr/libexec/PlistBuddy -c "Merge 'iTerm2/catppuccin-macchiato.itermcolors' :'Custom Color Presets':'catppuccin-macchiato'" ~/Library/Preferences/com.googlecode.iterm2.plist }
+
+  # catppuccin-mocha
+  run %{ /usr/libexec/PlistBuddy -c "Add :'Custom Color Presets':'catppuccin-mocha' dict" ~/Library/Preferences/com.googlecode.iterm2.plist }
+  run %{ /usr/libexec/PlistBuddy -c "Merge 'iTerm2/catppuccin-mocha.itermcolors' :'Custom Color Presets':'catppuccin-mocha'" ~/Library/Preferences/com.googlecode.iterm2.plist }
 
   # If iTerm2 is not installed or has never run, we can't autoinstall the profile since the plist is not there
   if !File.exist?(File.join(ENV['HOME'], '/Library/Preferences/com.googlecode.iterm2.plist'))
@@ -82,13 +90,12 @@ def install_term_theme
       "Please check your settings under:"
       "Preferences> Profiles> [your profile]> Colors> Load Preset.."
     }
-
     return
   end
 
-  # Install and apply lovelace iTerm theme to the profiles
+  # Install and apply catppuccin-frappe.itermcolors iTerm theme to the profiles
   profiles = ['Default']
-  color_scheme_file = File.join('iTerm2', 'lovelace.itermcolors')
+  color_scheme_file = File.join('iTerm2', 'catppuccin-frappe.itermcolors')
   apply_theme_to_iterm_profile_idx(profiles.index('Default'), color_scheme_file)
 end
 
