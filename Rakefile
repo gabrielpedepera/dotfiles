@@ -157,10 +157,10 @@ end
 
 def condigure_nvim
   fancy_puts 'Set AstroNvim'
-  run %{ cp -r "#{ENV["PWD"]}/nvim" "#{ENV["HOME"]}/.config/" }
+  run %{ ln -nfs "#{ENV["PWD"]}/nvim" "#{ENV["HOME"]}/.config/nvim" }
 
   fancy_puts 'Set Nvim configuration'
-  run %{ cp -r "#{ENV["PWD"]}/nvim_config" "#{ENV["HOME"]}/.config/lua/user/" }
+  run %{ ln -nfs "#{ENV["PWD"]}/nvim_config" "#{ENV["HOME"]}/.config/nvim/lua/user" }
 end
 
 def install_files(files, method = :symlink)
