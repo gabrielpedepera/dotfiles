@@ -16,7 +16,7 @@ task :install => [:submodule_init, :submodules] do
   install_files(Dir.glob('ruby/*'))
 
   install_zsh_enhancements
-  install_nvim_config
+  condigure_nvim
   run_bundle_config
 
   success_msg("installed")
@@ -155,10 +155,12 @@ def install_zsh_enhancements
   end
 end
 
-def install_nvim_config
-  fancy_puts 'NVIM Configuration'
-
+def condigure_nvim
+  fancy_puts 'Set AstroNvim'
   run %{ cp -r "#{ENV["PWD"]}/nvim" "#{ENV["HOME"]}/.config/" }
+
+  fancy_puts 'Set Nvim configuration'
+  run %{ cp -r "#{ENV["PWD"]}/nvim_config" "#{ENV["HOME"]}/.config/lua/user/" }
 end
 
 def install_files(files, method = :symlink)
