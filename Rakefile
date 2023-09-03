@@ -4,16 +4,18 @@ require 'fileutils'
 desc 'Hook our dotfiles into system-standard positions.'
 task :install => [:submodule_init, :submodules] do
   fancy_puts 'Welcome to Dotfiles Installation'
-  install_homebrew_packages if RUBY_PLATFORM.downcase.include?("darwin")
+
+  if RUBY_PLATFORM.downcase.include?("darwin")
+    install_homebrew_packages
+    install_term_themes
+  end
 
   puts 'Copying run commands and applying symbolic links'
   install_files(Dir.glob('git/*'))
   install_files(Dir.glob('irb/*'))
   install_files(Dir.glob('ruby/*'))
-  install_files(Dir.glob('vimify/*'))
 
   install_zsh_enhancements
-  install_term_themes if RUBY_PLATFORM.downcase.include?('darwin')
   run_bundle_config
 
   success_msg("installed")
