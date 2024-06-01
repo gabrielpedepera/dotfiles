@@ -16,7 +16,7 @@ task :install => [:submodule_init, :submodules] do
   install_files(Dir.glob('ruby/*'))
 
   install_zsh_enhancements
-  condigure_nvim
+  configure_nvim
   run_bundle_config
 
   success_msg("installed")
@@ -116,7 +116,7 @@ def install_homebrew_packages
   run %{which brew}
   if $?.success?
     puts 'Installing Homebrew packages... There may be some warnings...'
-    run %{brew install zsh starship nvim bat git-delta duf tldr}
+    run %{brew install asdf nvim bat git-delta duf tldr}
   else
     abort %q{
       You need to install homebrew manually first:
@@ -130,32 +130,16 @@ def install_zsh_enhancements
   fancy_puts 'ZSH Enhancements'
 
   install_files(Dir.glob('zsh/zshrc/zshrc'), :symlink)
-  # Install fzf is a general-purpose command-line fuzzy finder.
-  install_files(Dir.glob('zsh/fzf'), :symlink)
-  run %{ $HOME/.fzf/install --all --no-update-rc --no-bash --no-fish }
-
-  puts 'Creating directories for your customizations'
-  run %{ mkdir -p $HOME/.zsh.before }
-  run %{ mkdir -p $HOME/.zsh.after }
-  run %{ mkdir -p $HOME/.zsh.prompts }
+  install_fzf
 
   if "#{ENV['SHELL']}".include? 'zsh' then
     puts 'Zsh is already configured as your shell of choice. Restart your session to load the new settings'
   else
-    puts 'Setting zsh as your default shell'
-    if File.exists?("/usr/local/bin/zsh")
-      if File.readlines("/private/etc/shells").grep("/usr/local/bin/zsh").empty?
-        puts "Adding zsh to standard shell list"
-        run %{ echo "/usr/local/bin/zsh" | sudo tee -a /private/etc/shells }
-      end
-      run %{ chsh -s /usr/local/bin/zsh }
-    else
-      run %{ chsh -s /bin/zsh }
-    end
+    puts 'You need to set Zsh as your default shell'
   end
 end
 
-def condigure_nvim
+def configure_nvim
   fancy_puts 'Set AstroNvim'
   run %{ ln -nfs "#{ENV["PWD"]}/nvim" "#{ENV["HOME"]}/.config/nvim" }
 
