@@ -29,6 +29,10 @@ We automatically install a few useful packages including asdf, nvim, bat, git-de
 
 Oh My Posh is a prompt theme engine for any shell. We use the [Catppuccin Frappé](https://github.com/catppuccin/oh-my-posh) theme. The configuration is located at `zsh/themes/catppuccin_frappe.omp.json`.
 
+### [Neovim](https://neovim.io/)
+
+A minimal Neovim configuration with [lazy.nvim](https://github.com/folke/lazy.nvim) for plugin management and the [Catppuccin Frappé](https://github.com/catppuccin/nvim) colorscheme. The configuration is symlinked to `~/.config/nvim`.
+
 ### ZSH
 
 Think of Zsh as a more awesome bash without having to learn anything new.
