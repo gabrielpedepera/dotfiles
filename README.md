@@ -2,7 +2,6 @@
 
 ## To Do
 
-- [ ] Add NVIM config
 - [ ] Add VSCode config
 - [ ] Document Homebrew Tools
 ## Installation

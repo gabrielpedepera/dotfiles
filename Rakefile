@@ -73,11 +73,9 @@ def install_zsh_enhancements
 end
 
 def configure_nvim
-  fancy_puts 'Set AstroNvim'
-  run %{ ln -nfs "#{ENV["PWD"]}/nvim" "#{ENV["HOME"]}/.config/nvim" }
-
   fancy_puts 'Set Nvim configuration'
-  run %{ ln -nfs "#{ENV["PWD"]}/nvim_config" "#{ENV["HOME"]}/.config/nvim/lua/user" }
+  run %{ mkdir -p "#{ENV["HOME"]}/.config" }
+  run %{ ln -nfs "#{ENV["PWD"]}/nvim" "#{ENV["HOME"]}/.config/nvim" }
 end
 
 def install_files(files, method = :symlink)
