@@ -4,7 +4,6 @@
 
 - [ ] Add NVIM config
 - [ ] Add VSCode config
-- [ ] Remove Pryrc ?
 - [ ] Document Homebrew Tools
 ## Installation
 
@@ -13,18 +12,6 @@ To get started please run:
 ```bash
 sh -c "`curl -fsSL https://raw.githubusercontent.com/gabrielpedepera/dotfiles/main/install.sh`"
 ```
-## Wait, you're not done! Do this:
-#### Install iTerm Themes
-Go to Profiles => Colors => Load Presets to pick:
-
-* Lovelace
-* Solarized Dark
-#### Set up a system wide hotkey for iTerm (Keys=>Hotkey)
-Recommended Cmd-Escape
-
-#### In iTerm, uncheck "Native full screen windows" on General
-This will give you fast full screen windows that are switchable without switching to spaces.
-
 ### Upgrading
 
 Upgrading is easy.
@@ -41,8 +28,11 @@ rake update
 
 Homebrew is _the missing package manager for macOS_. Installed automatically.
 
-We automatically install a few useful packages including ctags, git, macvim, hub, and the silver searcher ('ag')
-Note that our autocomplete plugin requires a MacVim that supports Lua. The installer knows how to install it, but if you had one installed before, you may need to manually remove your old MacVim.
+We automatically install a few useful packages including asdf, nvim, bat, git-delta, duf, tldr, oh-my-posh, and font-hack-nerd-font.
+
+### [Oh My Posh](https://ohmyposh.dev/)
+
+Oh My Posh is a prompt theme engine for any shell. We use the [Catppuccin Frappé](https://github.com/catppuccin/oh-my-posh) theme. The configuration is located at `zsh/themes/catppuccin_frappe.omp.json`.
 
 ### ZSH
 
@@ -82,11 +72,3 @@ It is recommended to use this file to set your user info. Alternately, you can s
   * Some sensible default configs, such as improving merge messages, push only pushes the current branch, removing status hints, and using mnemonic prefixes in diff: (i)ndex, (w)ork tree, (c)ommit and (o)bject
   * Slightly improved colors for diff
   * `gdmb` (g)it (d)elete (m)erged (b)ranches - Deletes all branches already merged on current branch
-
-### RubyGems
-
-A .gemrc is included. Never again type `gem install whatever --no-ri --no-rdoc`. `--no-ri --no-rdoc` is done by default.
-
-### [Pry](https://pryrepl.org/)
-
-Pry offers a much better out of the box IRB experience with colors, tab completion, and lots of other tricks. You can also use it as an actual debugger by installing [pry-nav](https://github.com/nixme/pry-nav).

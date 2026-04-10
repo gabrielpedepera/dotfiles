@@ -1,2 +1,2 @@
 # Installed via Homebrew
-eval "$(starship init zsh)"
+eval "$(oh-my-posh init zsh --config ~/.dotfiles/zsh/themes/catppuccin_frappe.omp.json)"

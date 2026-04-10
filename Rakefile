@@ -7,17 +7,13 @@ task :install => [:submodule_init, :submodules] do
 
   if RUBY_PLATFORM.downcase.include?("darwin")
     install_homebrew_packages
-    install_term_themes
   end
 
   puts 'Copying run commands and applying symbolic links'
   install_files(Dir.glob('git/*'))
-  install_files(Dir.glob('irb/*'))
-  install_files(Dir.glob('ruby/*'))
 
   install_zsh_enhancements
   configure_nvim
-  run_bundle_config
 
   success_msg("installed")
 end
@@ -50,73 +46,11 @@ def run(cmd)
   `#{cmd}` unless ENV['DEBUG']
 end
 
-def number_of_cores
-  cores = if RUBY_PLATFORM.downcase.include?('darwin')
-            run %{ sysctl -n hw.ncpu }
-          else
-            run %{ nproc }
-          end
-  cores.to_i
-end
-
-def run_bundle_config
-  fancy_puts 'Configuring Bundlers for parallel gem installation'
-  return unless system('which bundle')
-
-  bundler_jobs = number_of_cores - 1
-  run %{ bundle config --global jobs #{bundler_jobs} }
-end
-
-def install_term_themes
-  fancy_puts 'Installing iTerm2 themes'
-
-  # catppuccin-frappe
-  run %{ /usr/libexec/PlistBuddy -c "Add :'Custom Color Presets':'catppuccin-frappe' dict" ~/Library/Preferences/com.googlecode.iterm2.plist }
-  run %{ /usr/libexec/PlistBuddy -c "Merge 'iTerm2.app/catppuccin-frappe.itermcolors' :'Custom Color Presets':'catppuccin-frappe'" ~/Library/Preferences/com.googlecode.iterm2.plist }
-
-  # catppuccin-latte
-  run %{ /usr/libexec/PlistBuddy -c "Add :'Custom Color Presets':'catppuccin-latte' dict" ~/Library/Preferences/com.googlecode.iterm2.plist }
-  run %{ /usr/libexec/PlistBuddy -c "Merge 'iTerm2.app/catppuccin-latte.itermcolors' :'Custom Color Presets':'catppuccin-latte'" ~/Library/Preferences/com.googlecode.iterm2.plist }
-
-  # catppuccin-macchiato
-  run %{ /usr/libexec/PlistBuddy -c "Add :'Custom Color Presets':'catppuccin-macchiato' dict" ~/Library/Preferences/com.googlecode.iterm2.plist }
-  run %{ /usr/libexec/PlistBuddy -c "Merge 'iTerm2.app/catppuccin-macchiato.itermcolors' :'Custom Color Presets':'catppuccin-macchiato'" ~/Library/Preferences/com.googlecode.iterm2.plist }
-
-  # catppuccin-mocha
-  run %{ /usr/libexec/PlistBuddy -c "Add :'Custom Color Presets':'catppuccin-mocha' dict" ~/Library/Preferences/com.googlecode.iterm2.plist }
-  run %{ /usr/libexec/PlistBuddy -c "Merge 'iTerm2.app/catppuccin-mocha.itermcolors' :'Custom Color Presets':'catppuccin-mocha'" ~/Library/Preferences/com.googlecode.iterm2.plist }
-
-  # If iTerm2 is not installed or has never run, we can't autoinstall the profile since the plist is not there
-  if !File.exist?(File.join(ENV['HOME'], '/Library/Preferences/com.googlecode.iterm2.plist'))
-    fancy_puts %q{
-      "To make sure your profile is using the theme"
-      "Please check your settings under:"
-      "Preferences> Profiles> [your profile]> Colors> Load Preset.."
-    }
-    return
-  end
-
-  # Install and apply catppuccin-frappe.itermcolors iTerm theme to the profiles
-  profiles = ['Default']
-  color_scheme_file = File.join('iTerm2.app', 'catppuccin-frappe.itermcolors')
-  apply_theme_to_iterm_profile_idx(profiles.index('Default'), color_scheme_file)
-end
-
-def apply_theme_to_iterm_profile_idx(index, color_scheme_path)
-  values = Array.new
-  16.times { |i| values << "Ansi #{i} Color" }
-  values << ['Background Color', 'Bold Color', 'Cursor Color', 'Cursor Text Color', 'Foreground Color', 'Selected Text Color', 'Selection Color']
-  values.flatten.each { |entry| run %{ /usr/libexec/PlistBuddy -c "Delete :'New Bookmarks':#{index}:'#{entry}'" ~/Library/Preferences/com.googlecode.iterm2.plist } }
-
-  run %{ /usr/libexec/PlistBuddy -c "Merge '#{color_scheme_path}' :'New Bookmarks':#{index}" ~/Library/Preferences/com.googlecode.iterm2.plist }
-  run %{ defaults read com.googlecode.iterm2 }
-end
-
 def install_homebrew_packages
   run %{which brew}
   if $?.success?
     puts 'Installing Homebrew packages... There may be some warnings...'
-    run %{brew install asdf nvim bat git-delta duf tldr font-hack-nerd-font}
+    run %{brew install asdf nvim bat git-delta duf tldr oh-my-posh font-hack-nerd-font}
   else
     abort %q{
       You need to install homebrew manually first:
@@ -130,7 +64,6 @@ def install_zsh_enhancements
   fancy_puts 'ZSH Enhancements'
 
   install_files(Dir.glob('zsh/zshrc/zshrc'), :symlink)
-  install_fzf
 
   if "#{ENV['SHELL']}".include? 'zsh' then
     puts 'Zsh is already configured as your shell of choice. Restart your session to load the new settings'
@@ -176,5 +109,3 @@ def success_msg(action)
   puts
   puts "Dotfiles has been #{action}. Please restart your terminal. ✌️"
 end
-
-
