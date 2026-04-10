@@ -39,11 +39,9 @@ Think of Zsh as a more awesome bash without having to learn anything new.
 Automatic spell correction for your commands, syntax highlighting, and more.
 We've also provided lots of enhancements:
 
-* `Ctrl-x,Ctrl-l` to insert output of last command
 * [fasd](https://github.com/clvv/fasd) integration - hit `z` and partial match for recently used directory. Tab completion enabled. Such as [autojump](https://github.com/wting/autojump)
-* `Ctrl-r` to use a general-purpose command-line fuzzy finder. [fsd](https://github.com/junegunn/fzf)
+* `Ctrl-r` or up arrow to search shell history with [Atuin](https://atuin.sh/) — shows a searchable list you can navigate with arrows
 * Fish-like fast/unobtrusive autosuggestions for zsh through [zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions)
-* [zsh-history-substring-search](https://github.com/zsh-users/zsh-history-substring-search): a clean-room implementation of the Fish shell's history search feature, where you can type in any part of any command from history and then press chosen keys, such as the UP and DOWN arrows, to cycle through matches.
 
 ### Aliases
 

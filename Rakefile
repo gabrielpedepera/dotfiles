@@ -50,7 +50,7 @@ def install_homebrew_packages
   run %{which brew}
   if $?.success?
     puts 'Installing Homebrew packages... There may be some warnings...'
-    run %{brew install asdf nvim bat git-delta duf tldr jandedobbeleer/oh-my-posh/oh-my-posh font-hack-nerd-font}
+    run %{brew install asdf nvim bat git-delta duf tldr jandedobbeleer/oh-my-posh/oh-my-posh atuin font-hack-nerd-font}
   else
     abort %q{
       You need to install homebrew manually first:
