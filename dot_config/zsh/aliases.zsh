@@ -1,7 +1,7 @@
 # Aliases in this file are bash and zsh compatible
 
 # Don't change. The following determines where Dotfiles is installed.
-dotfiles=$HOME/.dotfiles
+dotfiles=$HOME/.config/zsh
 
 # Get operating system
 platform='unknown'
@@ -38,11 +38,11 @@ alias lsg='ll | grep'
 
 # Alias Editing
 TRAPHUP() {
-  source $dotfiles/zsh/aliases.zsh
+  source $dotfiles/aliases.zsh
 }
 
-alias ae='vim $dotfiles/zsh/aliases.zsh' #alias edit
-alias ar='source $dotfiles/zsh/aliases.zsh'  #alias reload
+alias ae='vim $dotfiles/aliases.zsh' #alias edit
+alias ar='source $dotfiles/aliases.zsh'  #alias reload
 alias gar="killall -HUP -u \"$USER\" zsh"  #global alias reload
 
 # mimic vim functions

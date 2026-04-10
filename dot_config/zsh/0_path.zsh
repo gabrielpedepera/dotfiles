@@ -10,5 +10,4 @@ pathAppend() {
 # Remove duplicate entries from PATH:
 PATH=$(echo "$PATH" | awk -v RS=':' -v ORS=":" '!a[$1]++{if (NR > 1) printf ORS; printf $a[$1]}')
 
-pathAppend "$HOME/.dotfiles/bin"
-pathAppend "$HOME/.dotfiles/bin/dotfiles"
+pathAppend "$HOME/.local/bin"
