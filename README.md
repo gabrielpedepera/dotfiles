@@ -5,7 +5,7 @@ Managed with [chezmoi](https://www.chezmoi.io/).
 ## Installation
 
 ```bash
-sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply gabrielpedepera/dotfiles
+sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply --source=~/.dotfiles gabrielpedepera/dotfiles
 ```
 
 ## Updating
