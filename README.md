@@ -1,9 +1,5 @@
 # Dotfiles
 
-## To Do
-
-- [ ] Add VSCode config
-- [ ] Document Homebrew Tools
 ## Installation
 
 To get started please run:

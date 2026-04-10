@@ -15,4 +15,6 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 
 -- Load plugins
-require("lazy").setup("plugins")
+require("lazy").setup("plugins", {
+  rocks = { enabled = false },
+})
