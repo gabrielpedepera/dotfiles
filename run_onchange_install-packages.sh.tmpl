@@ -1,0 +1,94 @@
+#!/bin/bash
+# chezmoi:template:left-delimiter="# {{" right-delimiter="}}"
+
+set -euo pipefail
+
+# {{ if eq .chezmoi.os "darwin" }}
+
+if ! command -v brew &>/dev/null; then
+    echo "Installing Homebrew..."
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
+
+echo "Installing Homebrew packages..."
+brew install asdf nvim bat git-delta duf tldr \
+    jandedobbeleer/oh-my-posh/oh-my-posh \
+    atuin fzf zsh-autosuggestions font-hack-nerd-font \
+    copilot-cli docker gh
+
+# Set up fzf key bindings and completion
+if [[ ! -f ~/.fzf.zsh ]]; then
+    "$(brew --prefix)"/opt/fzf/install --key-bindings --completion --no-update-rc --no-bash --no-fish
+fi
+
+# {{ else if eq .chezmoi.os "linux" }}
+
+if command -v apt-get &>/dev/null; then
+    echo "Installing packages via apt..."
+    sudo apt-get update
+    sudo apt-get install -y git zsh neovim fzf bat duf tldr zsh-autosuggestions docker.io
+
+    # Install git-delta (diff viewer)
+    if ! command -v delta &>/dev/null; then
+        echo "Installing git-delta..."
+        sudo apt-get install -y git-delta 2>/dev/null || \
+            echo "git-delta not in apt, install manually: https://github.com/dandavison/delta/releases"
+    fi
+fi
+
+# Install asdf (version manager)
+if [[ ! -d "$HOME/.asdf" ]]; then
+    echo "Installing asdf..."
+    git clone https://github.com/asdf-vm/asdf.git ~/.asdf
+fi
+
+# Install oh-my-posh (prompt theme engine)
+if ! command -v oh-my-posh &>/dev/null; then
+    echo "Installing oh-my-posh..."
+    curl -s https://ohmyposh.dev/install.sh | bash -s
+fi
+
+# Install atuin (shell history)
+if ! command -v atuin &>/dev/null; then
+    echo "Installing atuin..."
+    curl --proto '=https' --tlsv1.2 -LsSf https://setup.atuin.sh | sh
+fi
+
+# Install GitHub Copilot CLI
+if ! command -v copilot &>/dev/null; then
+    echo "Installing GitHub Copilot CLI..."
+    curl -fsSL https://gh.io/copilot-install | bash
+fi
+
+# Install GitHub CLI
+if ! command -v gh &>/dev/null; then
+    echo "Installing GitHub CLI..."
+    curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg
+    echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null
+    sudo apt-get update && sudo apt-get install -y gh
+fi
+
+# Install Hack Nerd Font
+if [[ ! -d "$HOME/.local/share/fonts/Hack" ]]; then
+    echo "Installing Hack Nerd Font..."
+    mkdir -p "$HOME/.local/share/fonts/Hack"
+    curl -fsSL https://github.com/ryanoasis/nerd-fonts/releases/latest/download/Hack.tar.xz -o /tmp/Hack.tar.xz
+    tar -xf /tmp/Hack.tar.xz -C "$HOME/.local/share/fonts/Hack"
+    rm -f /tmp/Hack.tar.xz
+    fc-cache -fv
+fi
+
+# Set up fzf key bindings and completion
+if [[ ! -f ~/.fzf.zsh ]]; then
+    FZF_KEYBINDINGS="/usr/share/doc/fzf/examples/key-bindings.zsh"
+    FZF_COMPLETION="/usr/share/doc/fzf/examples/completion.zsh"
+    if [[ -f "$FZF_KEYBINDINGS" ]]; then
+        cat > ~/.fzf.zsh <<EOF
+source $FZF_KEYBINDINGS
+[[ -f $FZF_COMPLETION ]] && source $FZF_COMPLETION
+EOF
+    fi
+fi
+
+# {{ end }}

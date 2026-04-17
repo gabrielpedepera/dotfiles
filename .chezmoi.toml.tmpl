@@ -1,0 +1,8 @@
+{{- $name := promptStringOnce . "name" "Your full name" -}}
+{{- $email := promptStringOnce . "email" "Your email address" -}}
+
+sourceDir = {{ joinPath .chezmoi.homeDir ".dotfiles" | quote }}
+
+[data]
+    name = {{ $name | quote }}
+    email = {{ $email | quote }}

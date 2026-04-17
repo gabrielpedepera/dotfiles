@@ -1,0 +1,14 @@
+# Limit the number of results shown in the interactive search
+inline_height = 7
+
+# Execute command immediately on enter
+enter_accept = true
+
+# Search mode
+search_mode = "fuzzy"
+
+# Filter secrets from history
+secrets_filter = true
+
+[sync]
+records = true

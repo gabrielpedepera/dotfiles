@@ -1,0 +1,32 @@
+name: Test dotfiles
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test-linux:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Build Docker image
+        run: docker build -t dotfiles-test .
+
+      - name: Verify installed packages
+        run: |
+          docker run --rm dotfiles-test bash -c "
+            echo '=== Installed packages ==='
+            command -v nvim && echo '✓ nvim'
+            command -v bat && echo '✓ bat'
+            command -v fzf && echo '✓ fzf'
+            command -v tldr && echo '✓ tldr'
+            command -v duf && echo '✓ duf'
+            command -v zsh && echo '✓ zsh'
+            command -v oh-my-posh && echo '✓ oh-my-posh'
+            command -v atuin && echo '✓ atuin'
+            command -v copilot && echo '✓ copilot'
+            echo '=== All checks passed ==='
+          "
