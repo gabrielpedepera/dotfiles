@@ -3,7 +3,7 @@ FROM ubuntu:24.04
 ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update && apt-get install -y \
-    curl git sudo zsh ca-certificates unzip xz-utils fontconfig \
+    curl git sudo zsh ca-certificates unzip xz-utils fontconfig gnupg \
     && rm -rf /var/lib/apt/lists/*
 
 RUN useradd -m -s /bin/zsh testuser \

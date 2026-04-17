@@ -29,7 +29,7 @@ fi
 if command -v apt-get &>/dev/null; then
     echo "Installing packages via apt..."
     sudo apt-get update
-    sudo apt-get install -y git zsh neovim fzf bat duf tldr zsh-autosuggestions docker.io age
+    sudo apt-get install -y git zsh neovim fzf bat duf tldr zsh-autosuggestions docker.io age gnupg
 
     # Install git-delta (diff viewer)
     if ! command -v delta &>/dev/null; then
