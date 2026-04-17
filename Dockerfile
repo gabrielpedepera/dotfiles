@@ -23,7 +23,7 @@ RUN mkdir -p "$HOME/.config/chezmoi" \
 
 COPY --chown=testuser:testuser . /home/testuser/.dotfiles
 
-RUN chezmoi init --source /home/testuser/.dotfiles --apply --exclude-entry-types=encrypted
+RUN chezmoi init --source /home/testuser/.dotfiles --apply --exclude=encrypted
 
 # Smoke test: verify key commands are available
 ENV PATH="/home/testuser/.local/bin:/home/testuser/.asdf/bin:/home/testuser/.atuin/bin:${PATH}"
