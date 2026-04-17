@@ -47,23 +47,11 @@ Automatic spell correction, syntax highlighting, and more:
 
 ### Aliases
 
-See [ALIASES.md](ALIASES.md) for the full list of available aliases.
+See [ALIASES.md](docs/ALIASES.md) for the full list of available aliases.
 
 ### Git Customizations
 
-Dotfiles will take over your `~/.gitconfig`, so put your user info into `~/.gitconfig.user`.
-
-  * `git l` or `gl` - a much more usable git log
-  * `git b` or `gb` - a list of branches with summary of last commit
-  * `git r` - a list of remotes with info
-  * `git t` or `gt` - a list of tags with info
-  * `git nb` or `gnb` - checkout -b (new branch)
-  * `git cp` or `gcp` - cherry-pick -x
-  * `git simple` - clean format for changelogs
-  * `git recent-branches` - recently worked on branches
-  * `git unstage` / `guns` - remove from index
-  * `git uncommit` / `gunc` - revert last commit (dangerous if pushed)
-  * `gdmb` - delete all branches merged on current branch
+See [GIT.md](docs/GIT.md) for git aliases and configuration details.
 
 ## Testing
 
