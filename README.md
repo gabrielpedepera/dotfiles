@@ -4,9 +4,67 @@ Managed with [chezmoi](https://www.chezmoi.io/).
 
 ## Installation
 
-```bash
-sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply --source=~/.dotfiles gabrielpedepera/dotfiles
-```
+### New machine setup
+
+#### macOS
+
+1. Install [1Password](https://1password.com/downloads) and sign in.
+
+2. Install the 1Password CLI and age:
+
+   ```bash
+   brew install --cask 1password-cli
+   brew install age
+   ```
+
+3. Restore the age decryption key from 1Password:
+
+   ```bash
+   mkdir -p ~/.config/chezmoi
+   op item get chezmoi-age-key --fields notesPlain > ~/.config/chezmoi/chezmoi-key.txt
+   chmod 600 ~/.config/chezmoi/chezmoi-key.txt
+   ```
+
+4. Initialize and apply dotfiles:
+
+   ```bash
+   sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply --source=~/.dotfiles gabrielpedepera/dotfiles
+   ```
+
+5. Load your SSH key into the agent (persists across reboots via Keychain):
+
+   ```bash
+   ssh-add --apple-use-keychain ~/.ssh/id_ed25519
+   ```
+
+#### Linux
+
+1. Install 1Password CLI and age:
+
+   ```bash
+   sudo apt install age
+   # For 1Password CLI, see https://developer.1password.com/docs/cli/get-started/#install
+   ```
+
+2. Restore the age decryption key from 1Password:
+
+   ```bash
+   mkdir -p ~/.config/chezmoi
+   op item get chezmoi-age-key --fields notesPlain > ~/.config/chezmoi/chezmoi-key.txt
+   chmod 600 ~/.config/chezmoi/chezmoi-key.txt
+   ```
+
+3. Initialize and apply dotfiles:
+
+   ```bash
+   sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply --source=~/.dotfiles gabrielpedepera/dotfiles
+   ```
+
+4. Load your SSH key into the agent:
+
+   ```bash
+   ssh-add ~/.ssh/id_ed25519
+   ```
 
 ## Updating
 
@@ -20,7 +78,7 @@ chezmoi update
 
 Homebrew is _the missing package manager for macOS_. Installed automatically.
 
-Packages: asdf, nvim, bat, git-delta, duf, tldr, oh-my-posh, atuin, fzf, zsh-autosuggestions, font-hack-nerd-font, copilot-cli, and gh.
+Packages: asdf, nvim, bat, git-delta, duf, tldr, oh-my-posh, atuin, fzf, zsh-autosuggestions, font-hack-nerd-font, copilot-cli, gh, age, and 1password-cli.
 
 ### [GitHub Copilot CLI](https://github.com/features/copilot/cli/)
 

@@ -15,7 +15,9 @@ echo "Installing Homebrew packages..."
 brew install asdf nvim bat git-delta duf tldr \
     jandedobbeleer/oh-my-posh/oh-my-posh \
     atuin fzf zsh-autosuggestions font-hack-nerd-font \
-    copilot-cli docker gh
+    copilot-cli docker gh age
+
+brew install --cask 1password-cli
 
 # Set up fzf key bindings and completion
 if [[ ! -f ~/.fzf.zsh ]]; then
@@ -27,7 +29,7 @@ fi
 if command -v apt-get &>/dev/null; then
     echo "Installing packages via apt..."
     sudo apt-get update
-    sudo apt-get install -y git zsh neovim fzf bat duf tldr zsh-autosuggestions docker.io
+    sudo apt-get install -y git zsh neovim fzf bat duf tldr zsh-autosuggestions docker.io age
 
     # Install git-delta (diff viewer)
     if ! command -v delta &>/dev/null; then
@@ -77,6 +79,22 @@ if [[ ! -d "$HOME/.local/share/fonts/Hack" ]]; then
     tar -xf /tmp/Hack.tar.xz -C "$HOME/.local/share/fonts/Hack"
     rm -f /tmp/Hack.tar.xz
     fc-cache -fv
+fi
+
+# Install 1Password CLI
+if ! command -v op &>/dev/null; then
+    echo "Installing 1Password CLI..."
+    curl -sS https://downloads.1password.com/linux/keys/1password.asc | \
+        sudo gpg --dearmor --output /usr/share/keyrings/1password-archive-keyring.gpg
+    echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/1password-archive-keyring.gpg] https://downloads.1password.com/linux/debian/$(dpkg --print-architecture) stable main" | \
+        sudo tee /etc/apt/sources.list.d/1password.list
+    sudo mkdir -p /etc/debsig/policies/AC2D62742012EA22/
+    curl -sS https://downloads.1password.com/linux/debian/debsig/1password.pol | \
+        sudo tee /etc/debsig/policies/AC2D62742012EA22/1password.pol
+    sudo mkdir -p /usr/share/debsig/keyrings/AC2D62742012EA22
+    curl -sS https://downloads.1password.com/linux/keys/1password.asc | \
+        sudo gpg --dearmor --output /usr/share/debsig/keyrings/AC2D62742012EA22/debsig.gpg
+    sudo apt-get update && sudo apt-get install -y 1password-cli
 fi
 
 # Set up fzf key bindings and completion
