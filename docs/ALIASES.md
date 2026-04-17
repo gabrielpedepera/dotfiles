@@ -55,7 +55,7 @@
 | `remote-start` | `az vm start ...` | Start the VM |
 | `remote-stop` | `az vm deallocate ...` | Stop and deallocate (stops billing) |
 | `remote-status` | `az vm get-instance-view ...` | Show VM power state |
-| `remote-ssh` | `ssh ubuntu-remote-dev` | SSH into the VM |
+| `remote-ssh` | `ssh -t ubuntu-remote-dev "cd ~/Workspace && exec $SHELL -l"` | SSH into the VM (lands in ~/Workspace) |
 | `remote-ip` | `az vm list-ip-addresses ...` | Show public IP |
 
 ## Homebrew
