@@ -211,4 +211,8 @@ alias remote-start='az vm start -g rg-remote-development -n ubuntu-remote-dev'
 alias remote-stop='az vm deallocate -g rg-remote-development -n ubuntu-remote-dev'
 alias remote-status='az vm get-instance-view -g rg-remote-development -n ubuntu-remote-dev --query "{name:name, status:instanceView.statuses[1].displayStatus}" -o table'
 alias remote-ssh='ssh -t ubuntu-remote-dev "cd ~/Workspace && exec \$SHELL -l"'
+function remote-code() {
+  local remote_path="/home/gabrielpedepera${PWD#$HOME}"
+  code --folder-uri "vscode-remote://ssh-remote+ubuntu-remote-dev${remote_path}"
+}
 alias remote-ip='az vm list-ip-addresses -g rg-remote-development -n ubuntu-remote-dev --query "[0].virtualMachine.network.publicIpAddresses[0].ipAddress" -o tsv'

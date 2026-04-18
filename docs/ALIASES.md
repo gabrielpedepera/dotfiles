@@ -56,6 +56,7 @@
 | `remote-stop` | `az vm deallocate ...` | Stop and deallocate (stops billing) |
 | `remote-status` | `az vm get-instance-view ...` | Show VM power state |
 | `remote-ssh` | `ssh -t ubuntu-remote-dev "cd ~/Workspace && exec $SHELL -l"` | SSH into the VM (lands in ~/Workspace) |
+| `remote-code` | `code --remote ssh-remote+ubuntu-remote-dev "$(pwd)"` | Open VS Code on remote in current directory |
 | `remote-ip` | `az vm list-ip-addresses ...` | Show public IP |
 
 ## Homebrew
